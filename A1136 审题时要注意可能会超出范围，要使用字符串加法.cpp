@@ -13,23 +13,27 @@
 
 
 using namespace std;
-struct bign{
-    int num[2000];
-    int len;
-};
+string add(string s1,string s2){
+    int carry = 0;
+    string res;
+    for(int i = s1.length()-1 ; i>=0;--i){
 
-bign add(){
-
+        int num = ( (s1[i]-'0') + ((s2[i]-'0')) + carry) % 10;
+        carry =((s1[i]-'0') + ((s2[i]-'0')) + carry)/10;
+        res = to_string(num) + res;
+    }
+    if(carry != 0){
+        res = "1" + res;
+    }
+    return res;
 }
+
 
 bool judge(string a){
     string b = a;
     reverse(b.begin(),b.end());
     return a==b;
 }
-
-
-
 
 
 int main(){
@@ -47,9 +51,7 @@ int main(){
             reverse(a.begin(),a.end());
 
             cout << b << " + " << a ;
-            long long  aa = stoi(a);
-            long long  bb = stoi(b);
-            a = to_string(aa+bb);
+            a = (add(a,b));
             cout << " = " << a << endl;
         }
 
