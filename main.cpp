@@ -14,53 +14,75 @@ typedef long long LL;
 
 using namespace std;
 
-vector<int> child[100010];
+#include <cstdio>
+#include <algorithm>
+#include <map>
+#include <queue>
+#include <stack>
+#include <set>
+#include <math.h>
+#include <cstring>
+#include <iostream>
+#include<unordered_map>
+#define INF 0x3fffffff
 
-int N;
-double P,r;
-int counter= 1;
-int minDeep = INF;
-void DFS(int now,int deep){
-    if(child[now].empty()){
-        //
-        if(deep < minDeep){
-            minDeep = deep;
-            counter= 1;
-        }else if(deep == minDeep){
-            counter ++;
-        }
-        return;
+typedef long long LL;
+
+
+using namespace std;
+int n, m, k;
+const int maxn = 10010;
+int fa[maxn] = {0}, cnt[maxn] = {0};
+int findFather(int x) {
+    int a = x;
+    while(x != fa[x])
+        x = fa[x];
+    while(a != fa[a]) {
+        int z = a;
+        a = fa[a];
+        fa[z] = x;
     }
-    for(int i = 0 ; i < child[now].size();++i){
-        int next = child[now][i];
-        if(deep+1 > minDeep){
-            continue;
-        }
-        DFS(next,deep+1);
-    }
+    return x;
 }
-
-int main(){
-
-    cin >> N >> P >> r;
-    for(int i = 0 ; i < N ; ++i){
-        int n;
-        cin >> n;
-        for(int j = 0 ; j < n ; ++j){
-            int x;
-            cin >> x;
-            child[i].push_back(x);
+void Union(int a, int b) {
+    int faA = findFather(a);
+    int faB = findFather(b);
+    if(faA != faB) fa[faA] = faB;
+}
+bool exist[maxn];
+int main() {
+    scanf("%d", &n);
+    for(int i = 1; i <= maxn; i++)
+        fa[i] = i;
+    int id, temp;
+    for(int i = 0; i < n; i++) {
+        scanf("%d%d", &k, &id);
+        exist[id] = true;
+        for(int j = 0; j < k-1; j++) {
+            scanf("%d", &temp);
+            Union(id, temp);
+            exist[temp] = true;
         }
     }
-
-    DFS(0,0);
-    double ans = P;
-    for(int i=0 ; i < minDeep ; ++i){
-        ans *= (100.00+r)/100;
+    for(int i = 1; i <= maxn; i++) {
+        if(exist[i] == true) {
+            int root = findFather(i);
+            cnt[root]++;
+        }
     }
-    ans = ( ans /10000 )*10000;
-    printf("%.4lf %d",ans,counter);
-
-
-
+    int numTrees = 0, numBirds = 0;
+    for(int i = 1; i <= maxn; i++) {
+        if(exist[i] == true && cnt[i] != 0) {
+            numTrees++;
+            numBirds += cnt[i];
+        }
+    }
+    printf("%d %d\n", numTrees, numBirds);
+    scanf("%d", &m);
+    int ida, idb;
+    for(int i = 0; i < m; i++) {
+        scanf("%d%d", &ida, &idb);
+        printf("%s\n", (findFather(ida) == findFather(idb)) ? "Yes" : "No");
+    }
+    return 0;
 }

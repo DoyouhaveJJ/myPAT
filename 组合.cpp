@@ -34,6 +34,8 @@ long int C(long int n,long int m){
     return ans;
 }
 
+//C(n,m) = C(n-1,m-1) +C(n-1,m)
+
 
 int main(){
     printf("%ld",C(4,2));
