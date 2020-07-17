@@ -23,6 +23,7 @@ void Func(int i, int &j, int &tempsum) {
         else
             left = mid + 1;
     }
+    //将结果保存在j中
     j = right;
     tempsum = sum[j] - sum[i-1];
 }
