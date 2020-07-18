@@ -1,14 +1,4 @@
-#include <cstdio>
-#include <algorithm>
-#include <map>
-#include <queue>
-#include <stack>
-#include <set>
-#include <math.h>
-#include <cstring>
-#include <iostream>
-#include<unordered_map>
-#define INF 0x3fffffff
+ 
 typedef long long LL;
 using namespace std;
 
