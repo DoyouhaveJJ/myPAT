@@ -92,7 +92,7 @@ int main(){
 
     }
 
-    for(int i = 0 ; i < stuNum ; ++i){
+    for(int i = 0 ; i < stuNum ; ++i){Å
         if(Stu[i].programScore >= 200 && Stu[i].G >= 60){
             Stu[i].vaild = true;
         }

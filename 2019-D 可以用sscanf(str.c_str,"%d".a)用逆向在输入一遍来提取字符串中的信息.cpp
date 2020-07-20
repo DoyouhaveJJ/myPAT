@@ -190,12 +190,10 @@ int main(){
             int p2 = stoi(cmd.substr(ofindex+4,cmd.length()-(ofindex+4)+1));
             DFS_5(root,flag,p1,p2);
         }else if(type6!=-1){
-            //用sscanf!!!
             int andindex=cmd.find(" and ");
             int areindex=cmd.find(" are ");
-            int p1 = 0,deep1;
-            int p2 = 0,deep2;
-            sscanf(cmd.c_str(),"%d is the right child of %d", &p1, &p2);
+            int p1 = stoi(cmd.substr(0,andindex)),deep1;
+            int p2 = stoi(cmd.substr(andindex+5,areindex-(andindex+5)+1)),deep2;
             DFS_6(root,p1,deep1);
             DFS_6(root,p2,deep2);
             if(deep1==deep2){

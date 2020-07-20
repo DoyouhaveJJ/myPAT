@@ -1,4 +1,4 @@
- 
+
 typedef long long LL;
 using namespace std;
 
